@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import "./App.css";
+import Home from "./pages/Home";
+import { fetchAppName } from "./redux/AppReducer";
+import { dataSort, fetchData } from "./redux/DataReducer";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAppName());
+    dispatch(fetchData({ startDate: "2021-06-01", endDate: "2021-06-30" }));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Home />
     </div>
   );
 }
